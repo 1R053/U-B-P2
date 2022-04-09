@@ -1,0 +1,6 @@
+.DStore
+
+secret
+*.secret
+
+node_modules
