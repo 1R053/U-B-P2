@@ -1,7 +1,10 @@
+// SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.4.24;
 
 //Importing openzeppelin-solidity ERC-721 implemented Standard
 import "../node_modules/openzeppelin-solidity/contracts/token/ERC721/ERC721.sol";
+
+//error Unauthorized ();
 
 // StarNotary Contract declaration inheritance the ERC721 openzeppelin implementation
 contract StarNotary is ERC721 {
@@ -72,9 +75,13 @@ contract StarNotary is ERC721 {
         if (msg.sender==ownerOf(_tokenId1)){
             _transferFrom(msg.sender, ownerOf(_tokenId2), _tokenId1);
             _transferFrom(ownerOf(_tokenId2),msg.sender,_tokenId2);
-        } else {
+        } else if (msg.sender==ownerOf(_tokenId2)){
             _transferFrom(msg.sender, ownerOf(_tokenId1),_tokenId2);
             _transferFrom(ownerOf(_tokenId1),msg.sender,_tokenId1);
+        } else {
+            //use deprecated function due to old compiler version
+            revert("Unauthorized");
+            //revert Unauthorized();
         }
     }
 

@@ -2,5 +2,6 @@
 
 secret
 *.secret
+build-info
 
 node_modules
